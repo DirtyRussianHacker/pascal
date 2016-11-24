@@ -31,8 +31,8 @@ public:
 			_first =  new list<t>(data, nullptr, nullptr);
 			_last = _first;
 		}else{
-			_last = new list<t>(data, _last, nullptr);
-			_last->prev->next = _last;
+			_last->prev = new list<t>(data, _last, nullptr);
+			_last = _last->prev;
 		}
 		cout << "queue::enqueue called" << endl;
 	}
@@ -44,7 +44,8 @@ public:
 
 	void dequeue(){
 		cout << "queue::dequeue called" << endl;
-		_first = _first->next;
+		// Ещё удалить надо
+		_first = _first->prev;
 	}
 
 	t front(){
